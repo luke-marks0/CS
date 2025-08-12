@@ -1,21 +1,13 @@
-import json
-import math
-import string
-import re
-import random
-import sys
-import traceback
-import functools
-from collections import OrderedDict
+from __future__ import annotations
 
-import numpy
-import sortedcontainers
+from typing import Optional
 
-def simulate_coding_framework(list_of_lists):
-    """
-    Simulates a coding framework operation on a list of lists of strings.
+from framework.simulator import make_simulator
 
-    Parameters:
-    list_of_lists (List[List[str]]): A list of lists containing strings.
-    """
-    pass
+
+class FileStorage:
+    def dummy(self):
+        pass
+
+
+simulate_coding_framework = make_simulator(FileStorage)

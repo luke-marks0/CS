@@ -29,12 +29,19 @@ Example of file structure with various files:
 
 ## Level 1 – Initial Design & Basic Functions
 
-- **FILE_UPLOAD(file_name, size)**
+- **file_upload(file_name, size)**
   - Upload the file to the remote storage server.
   - If a file with the same name already exists on the server, it throws a runtime exception.
-- **FILE_GET(file_name)**
+- **file_get(file_name)**
   - Returns the size of the file, or nothing if the file doesn’t exist.
-- **FILE_COPY(source, dest)**
+- **file_copy(source, dest)**
   - Copy the source file to a new location.
   - If the source file doesn’t exist, it throws a runtime exception.
   - If the destination file already exists, it overwrites the existing file.
+
+## Level 2 – Data Structures & Data Processing
+
+- **file_search(prefix)**
+  - Find top 10 files starting with the provided prefix. Order results by their size in descending order, and in case of a tie by file name.
+
+
