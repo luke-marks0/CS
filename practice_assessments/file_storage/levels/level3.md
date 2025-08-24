@@ -46,14 +46,14 @@ Example of file structure with various files:
 
 ## Level 3 – Refactoring & Encapsulation
 
-Files now might have a specified time to live on the server. Implement extensions of existing methods which inherit all functionality but also with an additional parameter to include a timestamp for the operation, and new files might specify the time to live - no ttl means lifetime being infinite.
+Files now might have a specified time to live on the server. Implement extensions of existing methods which inherit all functionality but also add a timestamp (in epoch milliseconds) for the operation. New files may specify the time to live (TTL) in seconds — no TTL means the lifetime is infinite.
 
-- **file_upload_at(timestamp, file_name, file_size)**
-- **file_upload_at(timestamp, file_name, file_size, ttl)**
-  - The uploaded file is available for ttl seconds.
-- **file_get_at(timestamp, file_name)**
-- **file_copy_at(timestamp, file_from, file_to)**
-- **file_search_at(timestamp, prefix)**
-  - Results should only include files that are still “alive”.
+- **file_upload_at(timestamp_ms, file_name, file_size)**
+- **file_upload_at(timestamp_ms, file_name, file_size, ttl_seconds)**
+  - The uploaded file is available for `ttl_seconds` seconds from `timestamp_ms`.
+- **file_get_at(timestamp_ms, file_name)**
+- **file_copy_at(timestamp_ms, file_from, file_to)**
+- **file_search_at(timestamp_ms, prefix)**
+  - Results should only include files that are still “alive” at `timestamp_ms`.
 
 

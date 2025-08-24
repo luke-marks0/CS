@@ -39,6 +39,16 @@ class TestLevel1FileStorage(unittest.TestCase):
         self.store.file_copy("A.txt", "B.txt")
         self.assertEqual(self.store.file_get("B.txt"), 10)
 
+    def test_upload_zero_size_file(self):
+        self.store.file_upload("Zero.txt", 0)
+        self.assertEqual(self.store.file_get("Zero.txt"), 0)
+
+    def test_copy_source_to_same_destination_name(self):
+        # Copying onto itself should not error and should keep the same size
+        self.store.file_upload("Same.txt", 55)
+        self.store.file_copy("Same.txt", "Same.txt")
+        self.assertEqual(self.store.file_get("Same.txt"), 55)
+
 
 if __name__ == "__main__":
     unittest.main()

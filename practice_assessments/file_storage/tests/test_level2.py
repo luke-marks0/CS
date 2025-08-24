@@ -55,6 +55,30 @@ class TestLevel2Search(unittest.TestCase):
         self.store.file_upload("Alpha.txt", 1)
         self.assertEqual(self.store.file_search("Ba"), [])
 
+    def test_copy_then_search_uses_destination_name(self):
+        # Copy should update the stored name so search by destination prefix works
+        self.store.file_upload("A.txt", 100)
+        self.store.file_copy("A.txt", "B.txt")
+
+        # Should find B.txt via prefix 'B' and not duplicate under 'A'
+        self.assertEqual(self.store.file_search("B"), ["B.txt"])
+        self.assertEqual(self.store.file_search("A"), ["A.txt"])
+
+    def test_search_prefix_case_sensitivity(self):
+        # Verify that matching is case-sensitive (per straightforward .startswith behavior)
+        self.store.file_upload("Case.txt", 5)
+        self.assertEqual(self.store.file_search("case"), [])
+        self.assertEqual(self.store.file_search("Cas"), ["Case.txt"])
+
+    def test_search_limits_to_top_10(self):
+        for i in range(20):
+            # Ensure all match prefix 'X'; sizes descending so first 10 are the largest
+            self.store.file_upload(f"X{i:02d}.txt", 1000 - i)
+        result = self.store.file_search("X")
+        self.assertEqual(len(result), 10)
+        # First element should be the largest size name (X00)
+        self.assertEqual(result[0], "X00.txt")
+
 
 if __name__ == "__main__":
     unittest.main()
