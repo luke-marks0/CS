@@ -36,5 +36,5 @@ New/Updated methods:
 Notes:
 - Preserve all Level 1 behavior.
 - Implement cycle detection (DFS/BFS) to prevent circular dependencies.
-- Deleting a task should remove that task's ID from other tasks' `dependencies` (see Level 2 tests).
+- Deleting a task should remove that task's ID from other tasks' `dependencies`.
 - A `TODO` task with no dependencies is considered available and must not appear in `get_blocked_tasks()`.
